@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Triggers when compensation type is selected">
+   <aura:attribute name="type" type="String"/>
+
+</aura:event>

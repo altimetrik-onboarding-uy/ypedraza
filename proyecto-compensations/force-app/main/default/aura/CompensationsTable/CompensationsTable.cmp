@@ -1,0 +1,88 @@
+<aura:component
+  implements="flexipage:availableForAllPageTypes,lightning:actionOverride,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:appHostable"
+  controller="CompensationController"
+>
+  <!-- attributes -->
+  <aura:attribute name="compensations" type="Compensation__c[]" />
+  <aura:attribute name="type" type="String" />
+  <aura:attribute name="currParamId" type="String" />
+
+  <aura:handler event="c:TypeSelectionEvent" action="{!c.handleAppEvent}" />
+  <aura:registerEvent
+    name="editRecordEvent"
+    type="force:editRecord"
+  ></aura:registerEvent>
+
+  <aura:handler name="init" value="{!this}" action="{!c.doinit}" />
+  <table
+    class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped"
+  >
+    <thead>
+      <tr class="slds-line-height_reset">
+        <th class="" scope="col">
+          <div class="slds-truncate" title="Name">Employee Name</div>
+        </th>
+        <th class="" scope="col">
+          <div class="slds-truncate" title="Birthdate">Employee Birthdate</div>
+        </th>
+        <th class="" scope="col">
+          <div class="slds-truncate" title="Job Category">Job Category</div>
+        </th>
+        <th class="" scope="col">
+          <div class="slds-truncate" title="Compensation Type"
+            >Compensation Type</div
+          >
+        </th>
+        <th class="" scope="col">
+          <div class="slds-truncate" title="Amount">Amount</div>
+        </th>
+        <th class="" scope="col">
+          <div class="slds-truncate" title="Location">Location</div>
+        </th>
+        <th class="" scope="col">
+          <div class="slds-truncate" title="Office">Office</div>
+        </th>
+        <th class="" scope="col">
+          <div class="slds-truncate" title="Submitted">Submitted</div>
+        </th>
+        <th class="" scope="col">
+          <div class="slds-truncate" title="Status">Status</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <aura:iteration items="{!v.compensations}" var="x">
+        <tr>
+          <td
+            ><div class="slds-truncate" title="">
+              <a onclick="{!c.editRecord}" id="{!x.Id}"
+                >{!x.Employee__r.Name}</a
+              ></div
+            ></td
+          >
+          <td
+            ><div class="slds-truncate" title=""
+              ><lightning:formattedDateTime
+                value="{!x.Employee__r.Birthdate}"
+                year="numeric"
+                month="long"
+                day="2-digit"/></div
+          ></td>
+          <td
+            ><div class="slds-truncate" title="">{!x.Job_Category__c}</div></td
+          >
+          <td
+            ><div class="slds-truncate" title="">{!x.RecordType.Name}</div></td
+          >
+          <td><div class="slds-truncate" title="">{!x.Amount__c}</div></td>
+          <td><div class="slds-truncate" title="">{!x.Location__c}</div></td>
+          <td><div class="slds-truncate" title="">{!x.Office__c}</div></td>
+          <td><div class="slds-truncate" title="">{!x.Submitted__c}</div></td>
+          <td><div class="slds-truncate" title="">{!x.Status__c}</div></td>
+        </tr>
+      </aura:iteration>
+    </tbody>
+  </table>
+
+  
+</aura:component>
