@@ -51,34 +51,34 @@
       </tr>
     </thead>
     <tbody>
-      <aura:iteration items="{!v.compensations}" var="x">
+      <aura:iteration items="{!v.compensations}" var="cRow">
         <tr>
           <td
             ><div class="slds-truncate" title="">
-              <a onclick="{!c.editRecord}" id="{!x.Id}"
-                >{!x.Employee__r.Name}</a
+              <a onclick="{!c.editRecord}" id="{!cRow.Id}"
+                >{!cRow.Employee__r.Name}</a
               ></div
             ></td
           >
           <td
             ><div class="slds-truncate" title=""
               ><lightning:formattedDateTime
-                value="{!x.Employee__r.Birthdate}"
+                value="{!cRow.Employee__r.Birthdate}"
                 year="numeric"
                 month="long"
                 day="2-digit"/></div
           ></td>
           <td
-            ><div class="slds-truncate" title="">{!x.Job_Category__c}</div></td
+            ><div class="slds-truncate" title="">{!cRow.Job_Category__c}</div></td
           >
           <td
-            ><div class="slds-truncate" title="">{!x.RecordType.Name}</div></td
+            ><div class="slds-truncate" title="">{!cRow.RecordType.Name}</div></td
           >
-          <td><div class="slds-truncate" title="">{!x.Amount__c}</div></td>
-          <td><div class="slds-truncate" title="">{!x.Location__c}</div></td>
-          <td><div class="slds-truncate" title="">{!x.Office__c}</div></td>
-          <td><div class="slds-truncate" title="">{!x.Submitted__c}</div></td>
-          <td><div class="slds-truncate" title="">{!x.Status__c}</div></td>
+          <td><div class="slds-truncate" title="">{!cRow.Amount__c}</div></td>
+          <td><div class="slds-truncate" title="">{!cRow.Location__c}</div></td>
+          <td><div class="slds-truncate" title="">{!cRow.Office__c}</div></td>
+          <td><div class="slds-truncate" title="">{!cRow.Submitted__c}</div></td>
+          <td><div class="slds-truncate" title="">{!cRow.Status__c}</div></td>
         </tr>
       </aura:iteration>
     </tbody>

@@ -9,7 +9,6 @@
   },
     getCompensationsByType: function(component, type){
          var action = component.get("c.getByRecordType");
-        console.log(component.get("v.type"));
         action.setParams({ type : component.get("v.type") });
     var self = this;
     action.setCallback(this, function(actionResult) {
