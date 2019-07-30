@@ -4,21 +4,38 @@
 >
   <!-- attributes -->
   <aura:attribute name="compensations" type="Compensation__c[]" />
+      <aura:attribute name="activeFilterType" type="String" default="all"/>
+  <aura:attribute name="activeFilterStatus" type="String" default="all" />
   <aura:attribute name="type" type="String" />
-  <aura:attribute name="currParamId" type="String" />
+  <aura:attribute name="status" type="String" />
+  <aura:attribute name="selectedIds" type="String[]" />
 
   <aura:handler event="c:TypeSelectionEvent" action="{!c.handleAppEvent}" />
+  <aura:handler event="force:refreshView" action="{!c.doinit}" />
   <aura:registerEvent
     name="editRecordEvent"
     type="force:editRecord"
   ></aura:registerEvent>
 
   <aura:handler name="init" value="{!this}" action="{!c.doinit}" />
+
+  <div id="hidden">
+    <div class="slds-float--right slds-p-around_small">
+      <c:SubmitButton selectedIds="{!v.selectedIds}" />
+      <c:CSVExporterButton records="{!v.compensations}" />
+    </div>
+  </div>
+
   <table
     class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped"
+    role="grid"
   >
     <thead>
       <tr class="slds-line-height_reset">
+        <th style="width:3.25rem;" class="slds-text-align--right">
+          <div class="slds-form-element">
+          </div>
+        </th>
         <th class="" scope="col">
           <div class="slds-truncate" title="Name">Employee Name</div>
         </th>
@@ -51,38 +68,78 @@
       </tr>
     </thead>
     <tbody>
-      <aura:iteration items="{!v.compensations}" var="x">
+      <aura:iteration items="{!v.compensations}" var="cRow">
         <tr>
-          <td
+          <td scope="row" class="slds-text-align--right" style="width:3.25rem;">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <label class="slds-checkbox">
+                  <aura:if isTrue="{!cRow.Status__c == 'SUBMITTED'}">
+                    <ui:inputCheckbox
+                      aura:id="disabled"
+                      value=""
+                      disabled="true"
+                    />
+                    <span class="slds-checkbox--faux"></span>
+                    <span class="slds-form-element__label text"></span>
+
+                    <aura:set attribute="else">
+                      <ui:inputCheckbox
+                        text="{!cRow.Id}"
+                        aura:id="boxPack"
+                        value=""
+                        change="{!c.onCheckboxChange}"
+                      />
+                      <span class="slds-checkbox--faux"></span>
+                      <span class="slds-form-element__label text"></span>
+                    </aura:set>
+                  </aura:if>
+                </label>
+              </div>
+            </div>
+          </td>
+          <td scope="row"
             ><div class="slds-truncate" title="">
-              <a onclick="{!c.editRecord}" id="{!x.Id}"
-                >{!x.Employee__r.Name}</a
+              <a onclick="{!c.editRecord}" id="{!cRow.Id}"
+                >{!cRow.Employee__r.Name}</a
               ></div
             ></td
           >
-          <td
+          <td scope="row"
             ><div class="slds-truncate" title=""
               ><lightning:formattedDateTime
-                value="{!x.Employee__r.Birthdate}"
+                value="{!cRow.Employee__r.Birthdate}"
                 year="numeric"
                 month="long"
                 day="2-digit"/></div
           ></td>
-          <td
-            ><div class="slds-truncate" title="">{!x.Job_Category__c}</div></td
+          <td scope="row"
+            ><div class="slds-truncate" title="">{!cRow.Job_Category__c}</div></td
           >
-          <td
-            ><div class="slds-truncate" title="">{!x.RecordType.Name}</div></td
+          <td scope="row"
+            ><div class="slds-truncate" title="">{!cRow.RecordType.Name}</div></td
           >
-          <td><div class="slds-truncate" title="">{!x.Amount__c}</div></td>
-          <td><div class="slds-truncate" title="">{!x.Location__c}</div></td>
-          <td><div class="slds-truncate" title="">{!x.Office__c}</div></td>
-          <td><div class="slds-truncate" title="">{!x.Submitted__c}</div></td>
-          <td><div class="slds-truncate" title="">{!x.Status__c}</div></td>
+          <td scope="row"
+            ><div class="slds-truncate" title=""
+              ><lightning:formattedNumber
+                value="{!cRow.Amount__c}"
+                style="currency"
+                currencyCode="UYU"/></div
+          ></td>
+          <td scope="row"
+            ><div class="slds-truncate" title="">{!cRow.Location__c}</div></td
+          >
+          <td scope="row"
+            ><div class="slds-truncate" title="">{!cRow.Office__c}</div></td
+          >
+          <td scope="row"
+            ><div class="slds-truncate" title="">{!cRow.Submitted__c}</div></td
+          >
+          <td scope="row"
+            ><div class="slds-truncate" title="">{!cRow.Status__c}</div></td
+          >
         </tr>
       </aura:iteration>
     </tbody>
   </table>
-
-  
 </aura:component>

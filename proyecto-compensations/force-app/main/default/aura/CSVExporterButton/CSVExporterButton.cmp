@@ -1,0 +1,6 @@
+<aura:component description="CsvExporterButton">
+    <!--Declare Attribute for store Contact Records List-->
+    <aura:attribute name="records" type="Compensation__c[]"/>
+
+    <lightning:button  class="slds-button slds-button_brand" iconName="utility:download" onclick="{! c.downloadCsv }">Download</lightning:button> 
+</aura:component>

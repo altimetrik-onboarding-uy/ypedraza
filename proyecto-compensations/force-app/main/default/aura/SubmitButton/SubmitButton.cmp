@@ -1,0 +1,6 @@
+<aura:component description="Submit records" controller="CompensationController">
+    <!--Declare Attribute for store Contact Records List-->
+    <aura:attribute name="selectedIds" type="String[]"/>
+    
+    <lightning:button  class="slds-button slds-button_success" iconName="utility:approval" onclick="{! c.updateSelectedRows}">Submit</lightning:button> 
+</aura:component>

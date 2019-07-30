@@ -1,7 +1,21 @@
-<aura:component >   
-    <lightning:card title="Compensations list by Employees">
-        <div class="slds-size_1-of-4">
-     <c:CompensationsSelect/>
-        </div>
-    </lightning:card>
+<aura:component>
+  <lightning:card title="">
+    <div class="slds-page-header__name-title">
+      <h1>
+        <span
+          class="slds-page-header__title slds-truncate slds-m-left_small"
+          title=""
+          >Compensations list by Employees</span
+        >
+      </h1>
+    </div>
+      <div class="slds-grid slds-gutters">
+    <div class="slds-col slds-size_1-of-4">
+      <c:CompensationsSelect /> 
+    </div>  
+      <div class=" slds-col slds-size_1-of-4">
+      <c:CompensationSubmissionSelect />
+    </div>
+      </div>
+  </lightning:card>
 </aura:component>

@@ -4,9 +4,7 @@
   },
   editRecord: function(component, event, helper) {
     var editRecordEvent = $A.get("e.force:editRecord");
-    console.log(event.target.id);
     editRecordEvent.setParams({
-    
       recordId: event.target.id
     });
     editRecordEvent.fire();
@@ -14,13 +12,49 @@
 
   handleAppEvent: function(cmp, event, helper) {
     var type = event.getParam("type");
-    console.log(event.getParam("type"));
-    if (type == "all") {
+    var status = event.getParam("status");
+    var launcher = event.getParam("launcher");
+
+    var activeFilterStatus = cmp.get("v.activeFilterStatus");
+    var activeFilterType = cmp.get("v.activeFilterType");
+
+    if (type == "all" && activeFilterStatus == "all") {
       var a = cmp.get("c.doinit");
       $A.enqueueAction(a);
+      cmp.set("v.activeFilterType", type);
+    } else if (status == "all" && activeFilterType == "all") {
+      var a = cmp.get("c.doinit");
+      $A.enqueueAction(a);
+      cmp.set("v.activeFilterStatus", status);
     } else {
-      cmp.set("v.type", type);
-      helper.getCompensationsByType(cmp);
+      switch (launcher) {
+        case "typeSelect":
+          cmp.set("v.type", type);
+          cmp.set("v.activeFilterType", type);
+          helper.getCompensationsByType(cmp);
+          break;
+        case "submissionSelect":
+          cmp.set("v.status", status);
+          cmp.set("v.activeFilterStatus", status);
+          helper.getCompensationsByStatus(cmp);
+      }
     }
+  },
+
+  onCheckboxChange: function(component, event, helper) {
+    var submitId = [];
+    var getAllId = component.find("boxPack");
+    if (!Array.isArray(getAllId)) {
+      if (getAllId.get("v.value") == true) {
+        submitId.push(getAllId.get("v.text"));
+      }
+    } else {
+      for (var i = 0; i < getAllId.length; i++) {
+        if (getAllId[i].get("v.value") == true) {
+          submitId.push(getAllId[i].get("v.text"));
+        }
+      }
+    }
+    component.set("v.selectedIds", submitId);
   }
 });

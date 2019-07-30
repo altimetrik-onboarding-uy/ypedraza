@@ -1,0 +1,8 @@
+<aura:component>
+    <aura:registerEvent name="TypeSelectionEvent" type="c:TypeSelectionEvent" />
+    <lightning:select aura:id="select" class="slds-p-horizontal_small" name="select" label="Compensations submission filter" onchange="{! c.onChange }" required="true">
+        <option value="all">All compensations</option>
+        <option value="submitted">Submitted</option>
+        <option value="notSubmitted">Not Submitted</option>
+    </lightning:select>
+</aura:component>
