@@ -1,0 +1,7 @@
+<aura:component >   
+    <lightning:card title="Compensations list by Employees">
+        <div class="slds-size_1-of-4">
+     <c:CompensationsSelect/>
+        </div>
+    </lightning:card>
+</aura:component>

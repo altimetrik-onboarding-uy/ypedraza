@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Field_filled_and_other_not_selected</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(TEXT(Job_Category__c) &lt;&gt;  &quot;OTHER&quot;, NOT(ISBLANK(Other_details__c)))</errorConditionFormula>
+    <errorMessage>&quot;Other details&quot; field should not contain information about other job category if it is not selected</errorMessage>
+</ValidationRule>

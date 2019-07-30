@@ -1,0 +1,6 @@
+<aura:component implements="force:appHostable">
+  <div class="slds-p-around_x-small">
+    <c:CompensationsHeader /> 
+    <c:CompensationsTable />
+  </div>
+</aura:component>
